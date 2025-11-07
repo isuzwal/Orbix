@@ -1,18 +1,17 @@
-# 📚 Second Brain Web App
+#  Second Brain Web App
 
 Second Brain is a modern web app that helps you **organize, store, and retrieve knowledge** like never before.  
 Think of it as your personal "digital brain" — where ideas, notes, bookmarks, and resources live in one place.  
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🧠 Create and manage multiple "Brains" (knowledge spaces)  
-- 🔎 Smart search powered by embeddings + vector DB  
-- 🏷️ Tagging system for better organization  
-- 🔗 Shareable links for collaboration  
-- 📱 Responsive UI (mobile + desktop)  
-- ⚡ Built with performance and simplicity in mind  
+-  Create and manage multiple "Brains" (knowledge spaces)  
+-  Tagging system for better organization  
+-  Shareable links for collaboration  
+-  Responsive UI (mobile + desktop)  
+-  Built with performance and simplicity in mind  
 
 ---
 
@@ -36,7 +35,7 @@ Think of it as your personal "digital brain" — where ideas, notes, bookmarks, 
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 Clone the repository:
 
@@ -46,3 +45,4 @@ cd second-brain-app
 
 ```
 
+## ScreenShot 
