@@ -4,6 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar, PinIcon } from "lucide-react";
 import { useState } from "react";
 
+
 type Colors = "red" |  "green" | "purple" | "pink" | "yellow";
 interface NotesProps {
   id: string;
@@ -18,6 +19,9 @@ export default function Notesview() {
   const [content, setContent] = useState<string>("");
   const [selectColor, setSelectColor] = useState<Colors>("green");
   const [open, setOpen] = useState<boolean>(false);
+  const [noteOpen,setNoteOpen]=useState<boolean >(false);
+  const [selectedNoteId, setSelectedNoteId] = useState<string | null>(null);
+
 
   const expandModel = () => {
     setOpen((prev) => !prev);
@@ -44,9 +48,31 @@ export default function Notesview() {
     setNotes(note);
   };
 
+// edit and save
+
+ const handleEditandSave=(note_id:string)=>{
+     setNotes((Prev_note)=>
+          Prev_note.map((note)=>
+          note.id===note_id ? {...note , title,content,color:selectColor}:note)
+    )
+    setTitle("")
+    setContent("")
+    setNoteOpen(false)
+ }
+  // open the notes by note_id 
+ const openModel=(note_id:string)=>{
+     const  currentNotes=notes.find((note)=>note.id===note_id)
+     if(currentNotes){
+       setTitle(currentNotes.title)
+       setContent(currentNotes.content)
+       setSelectColor(currentNotes.color)
+       setSelectedNoteId(currentNotes.id)
+       setNoteOpen(true);
+     }
+ }
   return (
     <div className="min-h-screen  relative p-2 ">
-      {open && (
+      { open && (
         <div className="h-screen absolute  right-0 flex justify-center items-center   z-30 w-full ">
           <Model
             setOpen={expandModel}
@@ -57,6 +83,23 @@ export default function Notesview() {
             setTitle={setTitle}
             selectColor={selectColor}
             setSelectColor={setSelectColor}
+ 
+          /> 
+        </div>
+      )}
+      {noteOpen &&  selectedNoteId && (
+        <div className="h-screen absolute right-0 flex justify-center items-center z-30 w-full">
+          <EditNoteModel
+            id={selectedNoteId}
+            title={title}
+            content={content}
+            selectColor={selectColor}
+            setTitle={setTitle}
+            setContent={setContent}
+            setSelectColor={setSelectColor}
+            handleSave={handleEditandSave}
+            handleDelete={handleDelete}
+            onClose={() => setNoteOpen(false)}
           />
         </div>
       )}
@@ -87,11 +130,10 @@ export default function Notesview() {
                 <Calendar className="text-neutral-600 size-5" />
                 <span className="text-[12px] font-semibold mt-1">{note.date}</span>
               </h1>
-              <button onClick={() => handleDelete(note.id)} className="cursor-pointer">
+              <button onClick={()=>openModel(note.id)} className="cursor-pointer">
                 <PinIcon className="rotate-45 size-5 text-neutral-950" />
               </button>
             </div>
-
             <div className="p-1.5 flex flex-col gap-1">
               <h2 className="font-bold text-neutral-900 text-[14px]">{note.title}</h2>
               <p className="text-[10px] text-neutral-700 font-semibold leading-normal">
@@ -129,8 +171,8 @@ const Model = ({
     return ["red", "green", "purple", "pink", "yellow"].includes(value);
   };
   return (
-    <div className=" flex flex-col gap-1 justify-between  rounded-xl border z-20 bg-neutral-50 border-neutral-50 max-w-xl px-2 py-8 mx-auto w-full">
-      <h1 className="font-semibold text-[20px]  w-full flex justify-center">Add the Notes </h1>
+    <div className=" flex flex-col gap-1 justify-between  rounded-xl border z-20 bg-neutral-100 border-neutral-50 max-w-xl px-2 py-8 mx-auto w-full">
+      <h1 className="font-semibold text-[24px]  w-full flex justify-start  px-3">Add the Notes </h1>
       <div className="w-full p-2 flex flex-col gap-4">
         <Input
           type="text"
@@ -179,6 +221,89 @@ const Model = ({
           className="  flex  w-1/2 rounded-lg px-5 py-1.5  justify-center border-primary border bg-secondary text-neutral-900  cursor-pointer">
           Colse
         </button>
+      </div>
+    </div>
+  );
+};
+
+
+
+interface EditNoteProps {
+  id: string;
+  title: string;
+  content: string;
+  selectColor: Colors;
+  setTitle: (text: string) => void;
+  setContent: (text: string) => void;
+  setSelectColor: (color: Colors) => void;
+  handleSave: (id:string) => void;
+  handleDelete:(id:string)=>void;
+  onClose: () => void;
+}
+
+const EditNoteModel = ({
+  id,
+  title,
+  content,
+  selectColor,
+  setTitle,
+  setContent,
+  setSelectColor,
+  handleSave,
+ 
+  handleDelete
+}: EditNoteProps) => {
+  const isVaildColor = (value: string): value is Colors =>
+    ["red", "green", "purple", "pink", "yellow"].includes(value);
+
+  return (
+    <div className="flex flex-col gap-1 justify-between rounded-xl border z-20 bg-neutral-100 border-neutral-50 max-w-xl px-2 py-8 mx-auto w-full">
+      <h1 className="font-semibold text-[24px] w-full flex justify-start px-3">
+        Edit your note
+      </h1>
+      <div className="w-full p-2 flex flex-col gap-4">
+        <Input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <Textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <div className="px-4 w-full flex items-center justify-between border bg-zinc-100 border-zinc-100 rounded-lg py-2">
+          <span className="text-[14px]">Change Background color</span>
+          <select
+            value={selectColor}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (isVaildColor(value)) setSelectColor(value);
+            }}
+            className="w-full max-w-xs border border-neutral-300 bg-slate-100/90 text-neutral-800 text-sm font-medium
+             px-4 py-2 rounded-lg cursor-pointer transition-all"
+          >
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="pink">Pink</option>
+            <option value="purple">Purple</option>
+          </select>
+        </div>
+      </div>
+      <div className="w-full flex gap-2 items-center p-2">
+        <button
+          onClick={()=>handleSave(id)}
+          className="bg-primary text-secondary  w-1/2 rounded-lg px-5 py-1.5 cursor-pointer"
+        >
+          Save changes
+        </button>
+          <button
+          onClick={()=>handleDelete(id)}
+          className="bg-red-400 text-secondary w-1/2 rounded-lg px-5 py-1.5 cursor-pointer"
+        >
+        Delete Note
+        </button>
+        
       </div>
     </div>
   );

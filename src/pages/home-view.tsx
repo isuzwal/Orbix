@@ -64,6 +64,8 @@ export default function Home() {
             <FAQ />
           </div>
         </section>
+      </div>
+      <div className="bg-primary rounded-t-4xl text-neutral-100  py-12  mt-12 ">
         <Footer />
       </div>
     </div>
