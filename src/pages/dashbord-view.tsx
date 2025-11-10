@@ -10,8 +10,7 @@ import Error from "@/components/ui/error-view";
 
 
 
-export default function DashbordPage() {
- interface ContentItem {
+export interface ContentItem {
     _id: string;
     brain:string,
     title: string;
@@ -21,7 +20,10 @@ export default function DashbordPage() {
       username: string;
     };
     createdAt: string;
+    image:string
+    description:string
   }
+export default function DashbordPage() {
 
   const [IsModelOpen, setModeleOpen] = useState(false);
   const [shareModle,setSharemodel]=useState(false);
@@ -81,7 +83,7 @@ export default function DashbordPage() {
       </div>
       <CreateContent open={IsModelOpen} onClose={() => setModeleOpen(false)} />
       <SharePops open={shareModle}  OnOpen={()=>setSharemodel(false)}/>
-      <div className="grid grid-cols-1  lg:grid-cols-3 md:grid-cols-2  gap-2 items-stretch">
+      <div className="grid grid-cols-1  lg:grid-cols-3 sm::grid-cols-2  gap-2 items-stretch px-2 ">
         {content.length==0 && (
           <p className="text-muted-foreground ">Your brain empty</p>
         )}
@@ -92,8 +94,10 @@ export default function DashbordPage() {
             title={item.title}
             link={item.link.replace("x.com","twitter.com")}
             tags={item.tags}
+            image={item.image}
             username={item.userId.username}
             upload={item.createdAt}
+            description={item. description}
           />
         ))}
       </div>

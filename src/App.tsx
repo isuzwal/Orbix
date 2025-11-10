@@ -9,10 +9,10 @@ import YoutubePage from "./pages/dashbord-pages/youtbue-view";
 import Twitterpage from "./pages/dashbord-pages/twitter-view";
 import SoptifyPage from "./pages/dashbord-pages/spotify-view";
 import Page from "./pages/hash-page/Pgae"
-import Githubview from "./pages/dashbord-pages/github-view";
-import Blogsview from "./pages/dashbord-pages/blogs-view";
+
 import Notesview from "./pages/dashbord-pages/notes-view";
 import Imagesview from "./pages/dashbord-pages/images-view";
+import BlogPage from "./pages/dashbord-pages/blogs-view";
 function App() {
 
   return (
@@ -24,8 +24,8 @@ function App() {
       {/*Dashbord after login*/}
       <Route path="/dashbord" element={<AppLayout />}>
         <Route index element={<DashbordPage />} />
-        <Route path="/dashbord/github" element={<Githubview />} />
-        <Route path="/dashbord/blogs" element={<Blogsview />} />
+       
+        <Route path="/dashbord/blogs" element={<BlogPage />} />
         <Route path="/dashbord/twitter" element={<Twitterpage />} />
         <Route path="/dashbord/youtube" element={<YoutubePage />} />
         <Route path="/dashbord/soptify" element={<SoptifyPage />} />

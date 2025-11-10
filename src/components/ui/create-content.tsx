@@ -3,9 +3,11 @@ import { Input } from "./input";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-
 import { Field, FieldLabel, FieldGroup, FieldSet } from "./field";
 import { Textarea } from "./textarea";
+
+
+import { uploadImageToCloudinary } from "@/lib";
 
 interface OpenmodelPropps {
   open: boolean;
@@ -44,10 +46,14 @@ export function CreateContent({ open, onClose }: OpenmodelPropps) {
 
     try {
       setLoading(true);
-
+ let imageUrl=""
+ if(image){
+     imageUrl = await uploadImageToCloudinary(image) as string;
+      if (!imageUrl) throw new Error("Failed to upload image");
+    }
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/brain/user/add-content`,
-        { title: title, link: link, tags: tags, brain: brain ,description:description ,image:image},
+        { title: title, link: link, tags: tags, brain: brain ,description:description ,image:imageUrl},
         {
           headers: {
             Authorization: `Bearer ${token}`,
