@@ -2,7 +2,7 @@
 
 export const Footer = () => {
   return (
-    <footer className="text-center py-6 border-t text-gray-500 flex flex-col items-center gap-3">
+    <footer className="flex max-w-7xl mx-auto w-full text-center justify-center  p-5 items-center gap-3 ">
       <p>© {new Date().getFullYear()} Second Brain</p>
       <div className="flex gap-6">
         <a
@@ -22,7 +22,7 @@ export const Footer = () => {
           href="https://x.com/isuzwal"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 hover:text-sky-500 transition">
+          className="flex items-center gap-1 ">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 12 12">
             <path
               fill="currentColor"

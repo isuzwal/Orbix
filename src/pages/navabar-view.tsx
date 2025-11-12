@@ -27,7 +27,7 @@ export default function Navbar() {
       <div className="flex items-center gap-1">
         <Link to="/" className="flex gap-1 items-center">
           <Brain size={24} className="text-primary" />
-          <span className="text-xl font-semibold">SB</span>
+          <span className="text-xl font-semibold">Orbix</span>
         </Link>
       </div>
 
@@ -91,7 +91,7 @@ export default function Navbar() {
                 <Link to="/dashbord" onClick={() => setExpand(false)}>
                   <Button
                     variant="default"
-                    className="w-full cursor-pointer bg-purple-600 hover:bg-purple-700 text-white"
+                    className="w-full cursor-pointer bg-primary/90 hover:bg-primary/60 text-white"
                   >
                     Dashboard
                   </Button>

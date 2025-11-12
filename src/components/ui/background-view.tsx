@@ -43,7 +43,7 @@ export function GridSmallBackgroundDemo() {
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
             <div className="text-center z-20 max-w-4xl mx-auto">
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground mb-6 text-balance">
-              Your <span className="text-primary">Second Brain</span> Always With You
+               <span className="text-primary">Orbix</span> create and grow .
             </h1>
             <p className="text-xl  mb-8 max-w-2xl mx-auto text-pretty text-gray-700">
             <TypewriterEffect words={words} /> 
@@ -51,7 +51,7 @@ export function GridSmallBackgroundDemo() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/login" className="">
               <Button size="lg" className="text-lg px-8 cursor-pointer">
-                Get Started
+               Discover Your Flow
               </Button>
               </Link>
             

@@ -3,18 +3,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "@/components/ui/loading.view";
 import Error from "@/components/ui/error-view";
+import type { ContentItem } from "../dashbord-view";
 
-interface ContentItem {
-  _id: string;
-  brain: string;
-  title: string;
-  link: string;
-  tags: string[];
-  userId: {
-    username: string;
-  };
-  createdAt: string;
-}
+
 export default function SopfityPage() {
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
@@ -62,6 +53,8 @@ export default function SopfityPage() {
               tags={item.tags}
               username={item.userId.username}
               upload={item.createdAt}
+              description={item.description}
+              image={item.image}
             />
           ))}
         </div>

@@ -4,20 +4,13 @@ import { useParams } from "react-router";
 import Loading from "@/components/ui/loading.view";
 import Error from "@/components/ui/error-view";
 import { Card , type  Brain } from "@/components/ui/card-custom";
+import type { ContentItem } from "../dashbord-view";
 
-interface Content {
-  _id: string;
-  title: string;
-  link: string;
-  brain: Brain;
-  tags: string[];
-  userId: { username: string };
-  createdAt: string;
-}
+
 
 export default function Page() {
   const { shareLink } = useParams<{ shareLink: string }>();
-  const [data, setData] = useState<Content | null>(null);
+  const [data, setData] = useState<ContentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
@@ -36,6 +29,8 @@ export default function Page() {
         
            //@ts-ignore
         setData(res.data.content);
+         //@ts-ignore
+        console.log(res.data.content)
       } catch (err) {
       
         setError("Failed to load shared content ❌");
@@ -54,16 +49,24 @@ export default function Page() {
   if (!data) return <Error message="Content not found ❌" />;
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <Card
-        key={data._id}
-        title={data.title}
-        link={data.link}
-        brain={data.brain}
-        tags={data.tags}
-        username={data.userId?.username || "Unknown"}
-        upload={data.createdAt}
-      />
+    <div className="mx-auto w-full max-w-7xl p-1">
+    <div className="grid grid-cols-1  lg:grid-cols-3 sm::grid-cols-2  gap-2 items-stretch px-2 ">
+      {data.map((content)=>(
+        <>
+        <Card
+        key={content._id}
+        title={content.title}
+        link={content.link}
+        brain={content.brain as Brain}
+        tags={content.tags}
+        username={content.userId?.username || "Unknown"}
+        upload={content.createdAt}
+        description={content.description}
+        image={content.image}
+        />
+        </>
+      ))}
     </div>
+      </div>
   );
 }

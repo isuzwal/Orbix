@@ -16,14 +16,14 @@ export default function Home() {
         <Navabar />
         <GridSmallBackgroundDemo />
         <section className=" px-4  py-2  ">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              <span className="text-primary">Everyting</span> you need to organize your thoughts
-            </h2>
-            <p className="text-xl font-medium text-gray-900 dark:text-gray-300">
-              Simple tools for your digital memory palace
-            </p>
-          </div>
+         <div className="text-center mb-16">
+  <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+    <span className="text-primary">Everything</span> you need to organize your thoughts
+  </h2>
+  <p className="text-xl font-medium text-gray-900 dark:text-gray-300">
+    Built with <span className="text-primary font-semibold">Orbix</span>  your second brain in the cloud
+  </p>
+</div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="  p-8 rounded-2xl border border-neutral-300 transition-shadow duration-300">
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-2xl flex items-center justify-center mb-6">
@@ -64,6 +64,8 @@ export default function Home() {
             <FAQ />
           </div>
         </section>
+      </div>
+      <div className="bg-primary rounded-t-4xl text-neutral-100  py-12  mt-12 ">
         <Footer />
       </div>
     </div>

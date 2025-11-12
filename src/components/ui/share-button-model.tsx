@@ -23,7 +23,7 @@ export function SharePops({ open, OnOpen }: Sharemodel) {
         // @ts-ignore
         const url=`${import.meta.env.VITE_BACKEND_URL}/api/v1/brain/user/share-content/${res.data.hash}`;
          // @ts-ignore
-        const copyUrl=`http://localhost:5173/share-content/${res.data.hash}`
+        const copyUrl=`${import.meta.env.VITE_SHARE_URL}/share-content/${res.data.hash}`
         await navigator.clipboard.writeText(copyUrl);
         toast.success("Link copied to clipboard!")
         return url;
@@ -40,7 +40,7 @@ export function SharePops({ open, OnOpen }: Sharemodel) {
     <div className=" fixed bg-black/60 inset-0 z-20 flex items-center justify-center">
       <div className="bg-white relative shadow-xl items-center  flex  p-3 max-w-md h-40 w-full rounded-xl">
         <button
-          className="absolute cursor-pointer top-2 right-2 rounded-full bg-purple-600/70 text-white"
+          className="absolute cursor-pointer top-2 right-2 rounded-full bg-primary/80 text-white"
           onClick={OnOpen}>
           <X />
         </button>

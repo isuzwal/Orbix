@@ -3,25 +3,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "@/components/ui/loading.view";
 import Error from "@/components/ui/error-view";
+import type { ContentItem } from "../dashbord-view";
 
-interface ContentItem {
-  _id: string;
-  brain: string;
-  title: string;
-  link: string;
-  tags: string[];
-  userId: {
-    username: string;
-  };
-  createdAt: string;
-  image:string
-  description:string
-}
-export default function YoutubePage() {
+
+export default function BlogPage() {
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [content, setContent] = useState<ContentItem[]>([]);
+  const [error, setError] = useState("");
   useEffect(() => {
     const fetchbrain = async (value: string) => {
       try {
@@ -35,25 +24,22 @@ export default function YoutubePage() {
             },
           }
         );
-       
-      
-         // @ts-ignore
+        // @ts-ignore
         setContent(res.data.data);
       } catch (error: any) {
-        setError(error.response?.message || "Something went wrong  try again !");
-      
+        setError(error.response.message || "Something went wrong  try again !");
       } finally {
         setLoading(false);
       }
     };
-    fetchbrain("youtube");
+    fetchbrain("blog");
   }, []);
-   if(loading){
-    return <Loading  text="Looking into your brain" size={50} />
+  if (loading) {
+    return <Loading text="Looking into your brain" size={50} />;
   }
-  if(error) return <Error  message={error} onRetry={()=>window.location.reload()}/>
+  if (error) return <Error message={error} onRetry={() => window.location.reload()} />;
   return (
-      <>
+    <>
       {content.length === 0 ? (
         <p className="text-sm mt-2 font-semibold text-gray-700">Your brain  is empty!</p>
       ) : (
@@ -67,8 +53,8 @@ export default function YoutubePage() {
               tags={item.tags}
               username={item.userId.username}
               upload={item.createdAt}
-              image={item.image}
               description={item.description}
+              image={item.image}
             />
           ))}
         </div>

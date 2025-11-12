@@ -8,7 +8,7 @@ interface ErrorProps {
 
 const Error: React.FC<ErrorProps> = ({ message = "Something went wrong!", onRetry }) => {
   return (
-    <div className="flex flex-col items-center justify-center p-6 text-red-600">
+    <div className=" h-screen flex flex-col items-center justify-center p-6 text-red-600">
       <AlertTriangle size={40} className="mb-2" />
       <p className="text-sm font-medium">{message}</p>
       {onRetry && (

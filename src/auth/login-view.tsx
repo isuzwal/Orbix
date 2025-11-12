@@ -87,7 +87,7 @@ export default function LoginPage() {
               disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (
                 <>
-                  Logging in <LoaderIcon className="ml-2 h-4 w-4 animate-spin" />
+                  Loging in <LoaderIcon className="ml-2 h-4 w-4 animate-spin" />
                 </>
               ) : (
                 "Login"
